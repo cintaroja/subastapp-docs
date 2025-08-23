@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubastApp - Checklist de Seguridad</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            color: inherit;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav {
+            background: #34495e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #3498db;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content p {
+            margin-bottom: 15px;
+        }
+        .content ul, .content ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        .content li {
+            margin-bottom: 5px;
+        }
+        .content blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .warning {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="README.html">README</a>
+            <a href="deployment-postmortem.html">Postmortem</a>
+            <a href="architecture-overview.html">Arquitectura</a>
+            <a href="security-checklist.html">Seguridad</a>
+            <a href="troubleshooting-guide.html">Solución de Problemas</a>
+            <a href="user-interactions-timeline.html">Interacciones</a>
+        </div>
+        
+        <div class="content">
+            <h1>SubastApp - Checklist de Seguridad</h1>
+
+            <h2>🛡️ Checklist de Seguridad Implementada</h2>
+
+            <h3>✅ Configuraciones de Seguridad Aplicadas</h3>
+
+            <h4>1. Infraestructura y Red</h4>
+            <ul>
+                <li><span class="success">✅</span> <strong>Firewall configurado</strong> - Solo puertos necesarios abiertos (80, 443, 22)</li>
+                <li><span class="success">✅</span> <strong>SSH con claves</strong> - Autenticación por clave pública/privada</li>
+                <li><span class="success">✅</span> <strong>Usuario no-root</strong> - Contenedores ejecutándose como usuario no-root</li>
+                <li><span class="success">✅</span> <strong>Red aislada</strong> - Comunicación entre contenedores en red privada</li>
+                <li><span class="success">✅</span> <strong>Proxy reverso</strong> - Backend oculto detrás de Nginx</li>
+            </ul>
+
+            <h4>2. Aplicación</h4>
+            <ul>
+                <li><span class="success">✅</span> <strong>CORS configurado</strong> - Solo IPs autorizadas pueden acceder</li>
+                <li><span class="success">✅</span> <strong>Validación de entrada</strong> - API valida datos de entrada</li>
+                <li><span class="success">✅</span> <strong>Headers de seguridad</strong> - Nginx configura headers de seguridad</li>
+                <li><span class="success">✅</span> <strong>Autenticación</strong> - Sistema de autenticación implementado</li>
+                <li><span class="success">✅</span> <strong>Rate limiting</strong> - Implementado en Nginx (básico)</li>
+            </ul>
+
+            <h4>3. Base de Datos</h4>
+            <ul>
+                <li><span class="success">✅</span> <strong>Credenciales específicas</strong> - Usuario dedicado para la aplicación</li>
+                <li><span class="success">✅</span> <strong>Acceso restringido</strong> - Solo desde contenedores autorizados</li>
+                <li><span class="success">✅</span> <strong>Backup configurado</strong> - Dump SQL disponible</li>
+                <li><span class="success">✅</span> <strong>Índices optimizados</strong> - Consultas optimizadas</li>
+            </ul>
+
+            <h4>4. Contenedores</h4>
+            <ul>
+                <li><span class="success">✅</span> <strong>Imágenes oficiales</strong> - Uso de imágenes oficiales de Docker Hub</li>
+                <li><span class="success">✅</span> <strong>Multi-stage builds</strong> - Imágenes optimizadas y seguras</li>
+                <li><span class="success">✅</span> <strong>Volúmenes persistentes</strong> - Datos persistentes y seguros</li>
+                <li><span class="success">✅</span> <strong>Variables de entorno</strong> - Configuración externa al código</li>
+            </ul>
+
+            <h4>5. Repositorios</h4>
+            <ul>
+                <li><span class="success">✅</span> <strong>Archivos sensibles eliminados</strong> - .env, claves SSH removidas</li>
+                <li><span class="success">✅</span> <strong>.gitignore configurado</strong> - Prevención de futuras exposiciones</li>
+                <li><span class="success">✅</span> <strong>Tokens regenerados</strong> - Claves comprometidas reemplazadas</li>
+                <li><span class="success">✅</span> <strong>Documentación de seguridad</strong> - Procesos documentados</li>
+            </ul>
+
+            <h2>⚠️ Configuraciones de Seguridad Pendientes</h2>
+
+            <h3>🔴 Críticas (Implementar inmediatamente)</h3>
+
+            <h4>1. SSL/HTTPS</h4>
+            <ul>
+                <li><span class="error">❌</span> <strong>Certificado SSL</strong> - Let's Encrypt o certificado comercial</li>
+                <li><span class="error">❌</span> <strong>HTTP a HTTPS redirect</strong> - Redirección automática</li>
+                <li><span class="error">❌</span> <strong>HSTS headers</strong> - Headers de seguridad adicionales</li>
+            </ul>
+
+            <h4>2. Autenticación Mejorada</h4>
+            <ul>
+                <li><span class="error">❌</span> <strong>JWT tokens</strong> - Implementar autenticación con JWT</li>
+                <li><span class="error">❌</span> <strong>Password hashing</strong> - Si se implementa sistema de contraseñas</li>
+                <li><span class="error">❌</span> <strong>Session management</strong> - Gestión de sesiones segura</li>
+            </ul>
+
+            <h4>3. Monitoreo y Logs</h4>
+            <ul>
+                <li><span class="error">❌</span> <strong>Logs de seguridad</strong> - Monitoreo de intentos de acceso</li>
+                <li><span class="error">❌</span> <strong>Alertas</strong> - Notificaciones de eventos de seguridad</li>
+                <li><span class="error">❌</span> <strong>Audit trail</strong> - Registro de acciones de usuarios</li>
+            </ul>
+
+            <h3>🟡 Importantes (Implementar en próximas iteraciones)</h3>
+
+            <h4>1. Firewall Avanzado</h4>
+            <ul>
+                <li><span class="warning">⚠️</span> <strong>Fail2ban</strong> - Bloqueo automático de IPs maliciosas</li>
+                <li><span class="warning">⚠️</span> <strong>Reglas específicas</strong> - Reglas de firewall más granulares</li>
+                <li><span class="warning">⚠️</span> <strong>Monitoreo de tráfico</strong> - Análisis de patrones de tráfico</li>
+            </ul>
+
+            <h4>2. Base de Datos</h4>
+            <ul>
+                <li><span class="warning">⚠️</span> <strong>Conexiones SSL</strong> - Conexiones encriptadas a MySQL</li>
+                <li><span class="warning">⚠️</span> <strong>Backup automático</strong> - Backup programado y verificado</li>
+                <li><span class="warning">⚠️</span> <strong>Encriptación de datos</strong> - Encriptación de datos sensibles</li>
+            </ul>
+
+            <h4>3. Aplicación</h4>
+            <ul>
+                <li><span class="warning">⚠️</span> <strong>Input sanitization</strong> - Sanitización avanzada de entrada</li>
+                <li><span class="warning">⚠️</span> <strong>SQL injection protection</strong> - Protección adicional contra SQL injection</li>
+                <li><span class="warning">⚠️</span> <strong>XSS protection</strong> - Protección contra Cross-Site Scripting</li>
+            </ul>
+
+            <h3>🟢 Mejoras Futuras</h3>
+
+            <h4>1. Infraestructura</h4>
+            <ul>
+                <li><span class="warning">⚠️</span> <strong>Load balancer</strong> - Distribución de carga con SSL termination</li>
+                <li><span class="warning">⚠️</span> <strong>CDN</strong> - Content Delivery Network para assets</li>
+                <li><span class="warning">⚠️</span> <strong>WAF</strong> - Web Application Firewall</li>
+            </ul>
+
+            <h4>2. Desarrollo</h4>
+            <ul>
+                <li><span class="warning">⚠️</span> <strong>Code scanning</strong> - Análisis automático de vulnerabilidades</li>
+                <li><span class="warning">⚠️</span> <strong>Dependency scanning</strong> - Monitoreo de dependencias vulnerables</li>
+                <li><span class="warning">⚠️</span> <strong>Security testing</strong> - Tests automatizados de seguridad</li>
+            </ul>
+
+            <h2>📋 Procedimientos de Seguridad</h2>
+
+            <h3>1. Rotación de Credenciales</h3>
+            <p><strong>Frecuencia recomendada:</strong></p>
+            <ul>
+                <li>API Keys: Cada 90 días</li>
+                <li>JWT Secrets: Cada 180 días</li>
+                <li>Database passwords: Cada 365 días</li>
+                <li>SSH Keys: Cada 365 días</li>
+            </ul>
+
+            <h3>2. Backup de Seguridad</h3>
+            <p><strong>Frecuencia:</strong></p>
+            <ul>
+                <li>Base de datos: Diario</li>
+                <li>Configuraciones: Semanal</li>
+                <li>Logs: Mensual</li>
+            </ul>
+
+            <h3>3. Monitoreo de Seguridad</h3>
+            <p><strong>Métricas a monitorear:</strong></p>
+            <ul>
+                <li>Intentos de login fallidos</li>
+                <li>Conexiones SSH sospechosas</li>
+                <li>Errores de aplicación</li>
+                <li>Uso de recursos del sistema</li>
+                <li>Tráfico de red anómalo</li>
+            </ul>
+
+            <h2>🔍 Herramientas de Seguridad Recomendadas</h2>
+
+            <h3>Monitoreo</h3>
+            <ul>
+                <li><strong>Prometheus + Grafana</strong> - Métricas y alertas</li>
+                <li><strong>ELK Stack</strong> - Logs centralizados</li>
+                <li><strong>Fail2ban</strong> - Protección contra ataques</li>
+            </ul>
+
+            <h3>Testing</h3>
+            <ul>
+                <li><strong>OWASP ZAP</strong> - Testing de vulnerabilidades</li>
+                <li><strong>Snyk</strong> - Análisis de dependencias</li>
+                <li><strong>SonarQube</strong> - Análisis de código</li>
+            </ul>
+
+            <h2>📞 Contactos de Emergencia</h2>
+
+            <h3>Equipo de Seguridad</h3>
+            <ul>
+                <li><strong>Ingeniero de Sistemas</strong> - Responsable de infraestructura</li>
+                <li><strong>Daniel Otón</strong> - Desarrollador</li>
+                <li><strong>Cursor AI</strong> - Soporte técnico</li>
+            </ul>
+
+            <h2>Conclusión</h2>
+            <p>Este checklist debe revisarse y actualizarse regularmente para mantener la seguridad del sistema al día con las mejores prácticas y amenazas emergentes.</p>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubastApp - Arquitectura del Sistema</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            color: inherit;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav {
+            background: #34495e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #3498db;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content p {
+            margin-bottom: 15px;
+        }
+        .content ul, .content ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        .content li {
+            margin-bottom: 5px;
+        }
+        .content blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .architecture-diagram {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="README.html">README</a>
+            <a href="deployment-postmortem.html">Postmortem</a>
+            <a href="architecture-overview.html">Arquitectura</a>
+            <a href="security-checklist.html">Seguridad</a>
+            <a href="troubleshooting-guide.html">Solución de Problemas</a>
+            <a href="user-interactions-timeline.html">Interacciones</a>
+        </div>
+        
+        <div class="content">
+            <h1>SubastApp - Arquitectura del Sistema</h1>
+
+            <h2>🏗️ Visión General de la Arquitectura</h2>
+            <p>SubastApp es una aplicación de subastas en tiempo real que utiliza una arquitectura de microservicios containerizada con comunicación en tiempo real mediante WebSockets.</p>
+
+            <h2>📊 Diagrama de Arquitectura</h2>
+            <div class="architecture-diagram">
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Cliente Web   │    │   Cliente Web   │    │   Cliente Web   │
+│   (React App)   │    │   (React App)   │    │   (React App)   │
+└─────────┬───────┘    └─────────┬───────┘    └─────────┬───────┘
+          │                      │                      │
+          └──────────────────────┼──────────────────────┘
+                                 │
+                    ┌─────────────▼─────────────┐
+                    │        Nginx (80/443)     │
+                    │   (Proxy + Static Files)  │
+                    └─────────────┬─────────────┘
+                                  │
+                    ┌─────────────▼─────────────┐
+                    │      Backend (3001)       │
+                    │  (Node.js + Socket.IO)    │
+                    └─────────────┬─────────────┘
+                                  │
+                    ┌─────────────▼─────────────┐
+                    │      MySQL (3306)         │
+                    │    (Base de Datos)        │
+                    └───────────────────────────┘
+            </div>
+
+            <h2>🐳 Arquitectura de Contenedores</h2>
+            <p>La aplicación utiliza Docker Compose para orquestar los siguientes servicios:</p>
+            <ul>
+                <li><strong>mysql</strong>: Base de datos MySQL 8.0</li>
+                <li><strong>backend</strong>: API Node.js con Socket.IO</li>
+                <li><strong>nginx</strong>: Proxy reverso y servidor web</li>
+            </ul>
+
+            <h2>🔧 Componentes del Sistema</h2>
+
+            <h3>1. Frontend (React + TypeScript)</h3>
+            <p><strong>Tecnologías:</strong></p>
+            <ul>
+                <li>React 18.2.0</li>
+                <li>TypeScript 5.0.2</li>
+                <li>Vite 4.4.5 (build tool)</li>
+                <li>Tailwind CSS 3.3.3</li>
+                <li>Zustand 4.4.1 (state management)</li>
+                <li>Socket.IO Client 4.7.2</li>
+            </ul>
+
+            <h3>2. Backend (Node.js + TypeScript)</h3>
+            <p><strong>Tecnologías:</strong></p>
+            <ul>
+                <li>Node.js 18</li>
+                <li>TypeScript 5.9.2</li>
+                <li>Express 5.1.0</li>
+                <li>Socket.IO 4.8.1</li>
+                <li>Prisma 6.14.0 (ORM)</li>
+                <li>MySQL2 3.14.3</li>
+            </ul>
+
+            <h3>3. Base de Datos (MySQL)</h3>
+            <p><strong>Esquema de base de datos:</strong></p>
+            <ul>
+                <li><strong>Usuario</strong>: id, email, nombre, creditos, orden, salioDePuja, createdAt, updatedAt</li>
+                <li><strong>Item</strong>: id, rapidapiId, nombre, pais, equipo, posicion, subastado, precioInicial, imagen, ganadorId, createdAt, updatedAt</li>
+                <li><strong>Puja</strong>: id, monto, itemId, usuarioId, createdAt</li>
+                <li><strong>Configuracion</strong>: id, clave, valor, descripcion</li>
+                <li><strong>EstadoSubasta</strong>: id, subastaActiva, turnoActual, tiempoRestante, createdAt, updatedAt</li>
+            </ul>
+
+            <h3>4. Proxy/Web Server (Nginx)</h3>
+            <p>Nginx actúa como:</p>
+            <ul>
+                <li>Servidor de archivos estáticos del frontend</li>
+                <li>Proxy reverso para la API del backend</li>
+                <li>Proxy para WebSockets de Socket.IO</li>
+            </ul>
+
+            <h2>🔄 Flujo de Datos</h2>
+
+            <h3>1. Autenticación</h3>
+            <p>Cliente → Nginx → Backend → MySQL → Respuesta JSON</p>
+
+            <h3>2. Subasta en Tiempo Real</h3>
+            <p>Cliente A → Socket.IO → Backend → MySQL → Broadcast → Cliente B, C, D...</p>
+
+            <h3>3. Pujas</h3>
+            <p>Cliente → HTTP POST → Backend → MySQL → Broadcast → Todos los clientes</p>
+
+            <h2>🔒 Seguridad</h2>
+            <p><strong>Configuraciones de Seguridad Implementadas:</strong></p>
+            <ul>
+                <li><strong>Docker Security</strong>: Contenedores ejecutándose como usuario no-root</li>
+                <li><strong>Network Security</strong>: Solo puertos necesarios expuestos (80, 443, 3001, 3306)</li>
+                <li><strong>Application Security</strong>: CORS configurado para IPs específicas</li>
+                <li><strong>Data Security</strong>: Credenciales de base de datos específicas</li>
+            </ul>
+
+            <h2>📈 Escalabilidad</h2>
+            <p><strong>Estrategias de Escalabilidad:</strong></p>
+            <ul>
+                <li><strong>Horizontal Scaling</strong>: Backend puede escalar horizontalmente</li>
+                <li><strong>Vertical Scaling</strong>: Droplet puede aumentar recursos</li>
+                <li><strong>Caching</strong>: Redis puede agregarse para cache</li>
+            </ul>
+
+            <h2>🔍 Monitoreo y Logs</h2>
+            <p><strong>Logs Disponibles:</strong></p>
+            <ul>
+                <li><strong>Application Logs</strong>: Logs de Node.js en contenedor backend</li>
+                <li><strong>Infrastructure Logs</strong>: Logs de Docker Compose, Nginx, MySQL</li>
+                <li><strong>System Logs</strong>: Logs del sistema operativo, Docker daemon</li>
+            </ul>
+
+            <h2>🚀 Deployment</h2>
+            <p><strong>Infraestructura como Código:</strong></p>
+            <ul>
+                <li><strong>Terraform</strong>: Definición de recursos Digital Ocean</li>
+                <li><strong>GitHub Actions</strong>: CI/CD pipeline</li>
+                <li><strong>Docker</strong>: Imágenes optimizadas, multi-stage builds</li>
+            </ul>
+
+            <h2>📊 Métricas y KPIs</h2>
+            <p><strong>Métricas de Rendimiento:</strong></p>
+            <ul>
+                <li><strong>Application Metrics</strong>: Tiempo de respuesta de API, conexiones WebSocket</li>
+                <li><strong>Infrastructure Metrics</strong>: Uso de CPU y memoria, espacio en disco</li>
+                <li><strong>Business Metrics</strong>: Número de usuarios activos, pujas por minuto</li>
+            </ul>
+
+            <h2>Conclusión</h2>
+            <p>Esta arquitectura está diseñada para ser escalable, mantenible y segura, permitiendo futuras mejoras y optimizaciones según las necesidades del negocio.</p>
+        </div>
+    </div>
+</body>
+</html>
+

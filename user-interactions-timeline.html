@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubastApp - Timeline de Interacciones del Usuario</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            color: inherit;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav {
+            background: #34495e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #3498db;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content p {
+            margin-bottom: 15px;
+        }
+        .content ul, .content ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        .content li {
+            margin-bottom: 5px;
+        }
+        .content blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .timeline-item {
+            border-left: 3px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+        .impact-positive {
+            border-left-color: #27ae60;
+        }
+        .impact-positive::before {
+            background: #27ae60;
+        }
+        .impact-negative {
+            border-left-color: #e74c3c;
+        }
+        .impact-negative::before {
+            background: #e74c3c;
+        }
+        .impact-neutral {
+            border-left-color: #f39c12;
+        }
+        .impact-neutral::before {
+            background: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="README.html">README</a>
+            <a href="deployment-postmortem.html">Postmortem</a>
+            <a href="architecture-overview.html">Arquitectura</a>
+            <a href="security-checklist.html">Seguridad</a>
+            <a href="troubleshooting-guide.html">Solución de Problemas</a>
+            <a href="user-interactions-timeline.html">Interacciones</a>
+        </div>
+        
+        <div class="content">
+            <h1>SubastApp - Timeline de Interacciones del Usuario</h1>
+
+            <h2>📋 Resumen de Interacciones Clave</h2>
+            <p>Este documento registra las interacciones más importantes del usuario que influyeron significativamente en la dirección y decisiones del proyecto de despliegue.</p>
+
+            <h2>🎯 Interacciones que Cambiaron la Dirección del Proyecto</h2>
+
+            <div class="timeline-item impact-positive">
+                <h3>1. Decisión de Arquitectura de Infraestructura</h3>
+                <p><strong>Interacción:</strong> "Quiero pensar un poco más antes. Esto es para un uso intensivo durante 10 horas por unas 20 personas. Después pretendo mantenerlo online pero no estará en producción. Pienso que quizá la opción más economica puede ser un droplet más un saas de mysql (ambos en DO) puesto que ya tengo infra ahí de ambas cosas (también alguna app en app platform). Que piensas que es más adecuado en este escenario?"</p>
+                <p><strong>Impacto:</strong></p>
+                <ul>
+                    <li>✅ <strong>Cambio de estrategia</strong>: De App Platform + Managed MySQL a Droplet + Managed MySQL</li>
+                    <li>✅ <strong>Consideración de costos</strong>: Priorización de solución económica para uso específico</li>
+                    <li>✅ <strong>Aprovechamiento de infraestructura existente</strong>: Uso de recursos ya disponibles en DO</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item impact-positive">
+                <h3>2. Decisión de Usar Docker en Droplet</h3>
+                <p><strong>Interacción:</strong> "Y desplegarlo con la configuración actual de docker en un droplet? No hace falta cambiar la arquitectura con las últimas modificaciones, no? Así lo tendríamos preparado para el cambio a app platform en cualquier momento"</p>
+                <p><strong>Impacto:</strong></p>
+                <ul>
+                    <li>✅ <strong>Mantenimiento de Docker</strong>: Conservar configuración Docker existente</li>
+                    <li>✅ <strong>Flexibilidad futura</strong>: Preparación para migración a App Platform</li>
+                    <li>✅ <strong>Simplicidad de despliegue</strong>: Usar herramientas ya configuradas</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item impact-positive">
+                <h3>3. Separación de Repositorios</h3>
+                <p><strong>Interacción:</strong> "Creo que sería mejor separar la parte de la Infra en otro repositorio"</p>
+                <p><strong>Impacto:</strong></p>
+                <ul>
+                    <li>✅ <strong>Separación de responsabilidades</strong>: Código de aplicación vs infraestructura</li>
+                    <li>✅ <strong>Mejor gestión de versiones</strong>: Control independiente de cambios</li>
+                    <li>✅ <strong>Facilitar colaboración</strong>: Diferentes equipos pueden trabajar independientemente</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item impact-positive">
+                <h3>4. Implementación de GitHub Actions</h3>
+                <p><strong>Interacción:</strong> "que te parece hacer una github action en el repositorio de infra y desplegar desde allí al servidor?"</p>
+                <p><strong>Impacto:</strong></p>
+                <ul>
+                    <li>✅ <strong>Automatización del despliegue</strong>: CI/CD pipeline implementado</li>
+                    <li>✅ <strong>Reducción de errores manuales</strong>: Proceso estandarizado</li>
+                    <li>✅ <strong>Mejor trazabilidad</strong>: Logs y historial de despliegues</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item impact-positive">
+                <h3>5. Cambio a MySQL Local</h3>
+                <p><strong>Interacción:</strong> "ya se cual es el problema, es problema mio. Tenemos que cambiar la configuración. Vamos a hacer la BD en el droplet. Modifica lo que necesites en el docker para que la conexion este ahí (y en el tfvars)"</p>
+                <p><strong>Impacto:</strong></p>
+                <ul>
+                    <li>✅ <strong>Simplificación de arquitectura</strong>: Todo en un solo servidor</li>
+                    <li>✅ <strong>Reducción de costos</strong>: Eliminación de servicio MySQL gestionado</li>
+                    <li>✅ <strong>Mejor control</strong>: Gestión directa de la base de datos</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item impact-positive">
+                <h3>6. Población de Base de Datos</h3>
+                <p><strong>Interacción:</strong> "no, lo que quiero decir es que el del droplet es el que funciona seguro, úsalo como fuente, no?"</p>
+                <p><strong>Impacto:</strong></p>
+                <ul>
+                    <li>✅ <strong>Datos reales para testing</strong>: Base de datos poblada con información real</li>
+                    <li>✅ <strong>Validación de funcionalidad</strong>: Pruebas con datos reales</li>
+                    <li>✅ <strong>Preparación para producción</strong>: Sistema listo para uso real</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item impact-positive">
+                <h3>7. Documentación Completa</h3>
+                <p><strong>Interacción:</strong> "Lo siguiente que quiero que hagas es una documentación en formato postmortem de todo lo que hemos hecho desde que ha empezado esta conversación. En formato markup language."</p>
+                <p><strong>Impacto:</strong></p>
+                <ul>
+                    <li>✅ <strong>Documentación exhaustiva</strong>: Registro completo del proceso</li>
+                    <li>✅ <strong>Conocimiento preservado</strong>: Información disponible para futuros proyectos</li>
+                    <li>✅ <strong>Mejora de procesos</strong>: Lecciones aprendidas documentadas</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item impact-positive">
+                <h3>8. Documentación Web Accesible</h3>
+                <p><strong>Interacción:</strong> "Ok, ahora quiero que esto sea visualizable en el droplet en la dirección de la app con /documentacion"</p>
+                <p><strong>Impacto:</strong></p>
+                <ul>
+                    <li>✅ <strong>Acceso web a documentación</strong>: Documentación accesible públicamente</li>
+                    <li>✅ <strong>Mejora de UX</strong>: Interfaz web para navegar documentación</li>
+                    <li>✅ <strong>Profesionalización</strong>: Presentación profesional del proyecto</li>
+                </ul>
+            </div>
+
+            <h2>🔄 Interacciones de Resolución de Problemas</h2>
+
+            <div class="timeline-item impact-neutral">
+                <h3>Problema: Archivos package.json Corruptos</h3>
+                <p><strong>Interacción:</strong> "sigue lo que estas haciendo pero ten en cuenta que la app (la carpeta SUBASTAPP) viene de un ordenador Windows y este es un linux"</p>
+                <p><strong>Resolución:</strong> Identificación del problema de codificación Windows → Linux, recreación manual de archivos</p>
+            </div>
+
+            <div class="timeline-item impact-neutral">
+                <h3>Problema: Información Sensible Expuesta</h3>
+                <p><strong>Interacción:</strong> "revisa el codigo que se ha subido a ver si hay informacion sensible"</p>
+                <p><strong>Resolución:</strong> Eliminación de archivos sensibles, regeneración de claves, configuración de .gitignore</p>
+            </div>
+
+            <div class="timeline-item impact-neutral">
+                <h3>Problema: Renderizado de Documentación</h3>
+                <p><strong>Interacción:</strong> "se sigue viendo en texto plano"</p>
+                <p><strong>Resolución:</strong> Creación de archivos HTML renderizados en lugar de markdown crudo</p>
+            </div>
+
+            <h2>📊 Análisis de Patrones de Interacción</h2>
+
+            <h3>Características del Usuario</h3>
+            <ul>
+                <li><strong>Experiencia técnica alta</strong>: Conocimiento profundo de infraestructura cloud</li>
+                <li><strong>Enfoque pragmático</strong>: Priorización de soluciones prácticas sobre perfección</li>
+                <li><strong>Pensamiento estratégico</strong>: Consideración de costos y escalabilidad futura</li>
+                <li><strong>Resolución sistemática</strong>: Abordaje estructurado de problemas</li>
+            </ul>
+
+            <h3>Patrones de Decisión</h3>
+            <ul>
+                <li><strong>Evaluación de costos</strong>: Siempre considera el aspecto económico</li>
+                <li><strong>Flexibilidad futura</strong>: Prepara para cambios y escalabilidad</li>
+                <li><strong>Separación de responsabilidades</strong>: Divide claramente diferentes aspectos del proyecto</li>
+                <li><strong>Documentación</strong>: Valora la preservación del conocimiento</li>
+            </ul>
+
+            <h2>🎯 Lecciones Aprendidas de las Interacciones</h2>
+
+            <h3>Positivas:</h3>
+            <ol>
+                <li><strong>Experiencia del usuario</strong>: Conocimiento profundo de infraestructura cloud</li>
+                <li><strong>Enfoque sistemático</strong>: Resolución de problemas en orden lógico</li>
+                <li><strong>Priorización correcta</strong>: Enfoque en funcionalidad antes que perfección</li>
+                <li><strong>Gestión de seguridad</strong>: Atención a aspectos de seguridad desde el inicio</li>
+            </ol>
+
+            <h3>Áreas de Mejora:</h3>
+            <ol>
+                <li><strong>Comunicación inicial</strong>: Mejor alineación de expectativas al inicio</li>
+                <li><strong>Documentación</strong>: Documentar decisiones y configuraciones más temprano</li>
+                <li><strong>Testing</strong>: Más testing en etapas tempranas del proceso</li>
+            </ol>
+
+            <h2>📈 Impacto en el Proyecto Final</h2>
+
+            <h3>Arquitectura Final</h3>
+            <ul>
+                <li><strong>Droplet + MySQL local</strong>: Solución económica y controlada</li>
+                <li><strong>Docker Compose</strong>: Facilita futuras migraciones</li>
+                <li><strong>Repositorios separados</strong>: Mejor organización del código</li>
+                <li><strong>GitHub Actions</strong>: Automatización del despliegue</li>
+            </ul>
+
+            <h3>Calidad del Resultado</h3>
+            <ul>
+                <li><strong>Aplicación funcional</strong>: Sistema completamente operativo</li>
+                <li><strong>Documentación completa</strong>: 5 archivos de documentación detallada</li>
+                <li><strong>Seguridad implementada</strong>: Configuraciones de seguridad básicas</li>
+                <li><strong>Escalabilidad preparada</strong>: Listo para futuras mejoras</li>
+            </ul>
+
+            <h2>Conclusión</h2>
+            <p>Las interacciones del usuario fueron fundamentales para el éxito del proyecto, proporcionando dirección técnica, validación continua y enfoque pragmático que resultó en un despliegue exitoso y funcional. La experiencia del usuario en infraestructura cloud y su enfoque sistemático fueron clave para superar los desafíos técnicos encontrados.</p>
+        </div>
+    </div>
+</body>
+</html>
+

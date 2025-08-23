@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubastApp - Memories del AI Assistant</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            color: inherit;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav {
+            background: #34495e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #3498db;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content p {
+            margin-bottom: 15px;
+        }
+        .content ul, .content ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        .content li {
+            margin-bottom: 5px;
+        }
+        .content blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .warning {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .memory-item {
+            border-left: 3px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .memory-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+        .memory-accepted {
+            border-left-color: #27ae60;
+        }
+        .memory-accepted::before {
+            background: #27ae60;
+        }
+        .memory-rejected {
+            border-left-color: #e74c3c;
+        }
+        .memory-rejected::before {
+            background: #e74c3c;
+        }
+        .memory-candidate {
+            border-left-color: #f39c12;
+        }
+        .memory-candidate::before {
+            background: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="README.html">README</a>
+            <a href="deployment-postmortem.html">Postmortem</a>
+            <a href="architecture-overview.html">Arquitectura</a>
+            <a href="security-checklist.html">Seguridad</a>
+            <a href="troubleshooting-guide.html">Solución de Problemas</a>
+            <a href="user-interactions-timeline.html">Interacciones</a>
+            <a href="ai-memories.html">Memories AI</a>
+        </div>
+        
+        <div class="content">
+            <h1>SubastApp - Memories del AI Assistant</h1>
+
+            <h2>📋 Resumen de Memories Aprendidos</h2>
+            <p>Este documento registra todos los "memories" (recuerdos) que el AI Assistant ha aprendido durante la interacción con el usuario, incluyendo preferencias, patrones de comportamiento y configuraciones específicas.</p>
+
+            <h2>🎯 Memories Comunicados y Aceptados por el Usuario</h2>
+
+            <div class="memory-item memory-accepted">
+                <h3>1. Preferencia de Transferencia de Archivos</h3>
+                <ul>
+                    <li><strong>Memory ID</strong>: 6996695</li>
+                    <li><strong>Descripción</strong>: El usuario prefiere usar <code>sftp</code> para transferencias de archivos en lugar de <code>scp</code></li>
+                    <li><strong>Contexto</strong>: Durante el despliegue, el usuario solicitó explícitamente usar <code>sftp</code> para todas las transferencias</li>
+                    <li><strong>Impacto</strong>: Todas las transferencias posteriores se realizaron con <code>sftp</code></li>
+                    <li><strong>Estado</strong>: <span class="success">✅ Aceptado y aplicado</span></li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-accepted">
+                <h3>2. Configuración de Git Init</h3>
+                <ul>
+                    <li><strong>Memory ID</strong>: 6989108</li>
+                    <li><strong>Descripción</strong>: El usuario prefiere ejecutar <code>git init</code> solo en la carpeta del proyecto SUBASTAPP, no en el subdirectorio Code</li>
+                    <li><strong>Contexto</strong>: Durante la configuración inicial de repositorios</li>
+                    <li><strong>Impacto</strong>: Configuración de Git realizada en el nivel correcto del proyecto</li>
+                    <li><strong>Estado</strong>: <span class="success">✅ Aceptado y aplicado</span></li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-accepted">
+                <h3>3. Separación de Infraestructura</h3>
+                <ul>
+                    <li><strong>Memory ID</strong>: 6989101</li>
+                    <li><strong>Descripción</strong>: El usuario prefiere separar el código de infraestructura (Terraform) en un repositorio dedicado, separado del repositorio principal de la aplicación</li>
+                    <li><strong>Contexto</strong>: Durante la planificación de la arquitectura del proyecto</li>
+                    <li><strong>Impacto</strong>: Creación de repositorio <code>subastapp-infra</code> separado</li>
+                    <li><strong>Estado</strong>: <span class="success">✅ Aceptado y aplicado</span></li>
+                </ul>
+            </div>
+
+            <h2>🔍 Memories Aprendidos pero No Comunicados</h2>
+
+            <div class="memory-item memory-accepted">
+                <h3>1. Preferencia de Comandos en Inglés</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario prefiere que los mensajes de commit de Git estén en inglés</li>
+                    <li><strong>Contexto</strong>: Durante la configuración del primer commit</li>
+                    <li><strong>Evidencia</strong>: "Además prefiero que los mensajes de los commits los hagamos en inglés"</li>
+                    <li><strong>Estado</strong>: <span class="success">✅ Aplicado automáticamente</span></li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-accepted">
+                <h3>2. Enfoque Pragmático en Solución de Problemas</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario prioriza soluciones prácticas y funcionales sobre perfección técnica</li>
+                    <li><strong>Contexto</strong>: Múltiples decisiones durante el despliegue</li>
+                    <li><strong>Evidencia</strong>:
+                        <ul>
+                            <li>Cambio de App Platform a Droplet por costos</li>
+                            <li>Uso de <code>|| true</code> en Dockerfile para bypass de errores</li>
+                            <li>Priorización de funcionalidad sobre optimización</li>
+                        </ul>
+                    </li>
+                    <li><strong>Estado</strong>: <span class="success">✅ Aplicado automáticamente</span></li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-accepted">
+                <h3>3. Preferencia por Documentación Completa</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario valora mucho la documentación exhaustiva y detallada</li>
+                    <li><strong>Contexto</strong>: Solicitud de postmortem completo y documentación web</li>
+                    <li><strong>Evidencia</strong>: "Lo siguiente que quiero que hagas es una documentación en formato postmortem de todo lo que hemos hecho"</li>
+                    <li><strong>Estado</strong>: <span class="success">✅ Aplicado automáticamente</span></li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-accepted">
+                <h3>4. Atención a la Seguridad</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario es muy consciente de los aspectos de seguridad</li>
+                    <li><strong>Contexto</strong>: Revisión de información sensible en repositorios</li>
+                    <li><strong>Evidencia</strong>: "revisa el codigo que se ha subido a ver si hay informacion sensible"</li>
+                    <li><strong>Estado</strong>: <span class="success">✅ Aplicado automáticamente</span></li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-accepted">
+                <h3>5. Preferencia por Soluciones Simples y Directas</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario prefiere soluciones simples y directas sobre complejidad innecesaria</li>
+                    <li><strong>Contexto</strong>: Resolución del problema de renderizado de documentación</li>
+                    <li><strong>Evidencia</strong>: "en lugar de copiar directamente los ficheros locales, con ese contenido crea los ficheros HTML"</li>
+                    <li><strong>Estado</strong>: <span class="success">✅ Aplicado automáticamente</span></li>
+                </ul>
+            </div>
+
+            <h2>🚫 Memories No Aceptados o Rechazados</h2>
+
+            <div class="memory-item memory-rejected">
+                <h3>1. Uso de CDN Externo para Markdown</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: Propuesta de usar <code>marked.js</code> desde CDN para renderizar markdown</li>
+                    <li><strong>Contexto</strong>: Implementación del visor de documentación</li>
+                    <li><strong>Razón del rechazo</strong>: Problemas de conectividad y dependencias externas</li>
+                    <li><strong>Estado</strong>: <span class="error">❌ Rechazado - Reemplazado por solución standalone</span></li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-rejected">
+                <h3>2. Configuración Compleja de JavaScript</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: Implementación de visor JavaScript complejo con navegación dinámica</li>
+                    <li><strong>Contexto</strong>: Visor de documentación web</li>
+                    <li><strong>Razón del rechazo</strong>: Problemas de compatibilidad y complejidad innecesaria</li>
+                    <li><strong>Estado</strong>: <span class="error">❌ Rechazado - Reemplazado por HTML simple</span></li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-rejected">
+                <h3>3. Servido de Archivos Markdown Crudos</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: Servir archivos markdown directamente desde Nginx</li>
+                    <li><strong>Contexto</strong>: Configuración inicial de documentación web</li>
+                    <li><strong>Razón del rechazo</strong>: Los navegadores no renderizan markdown automáticamente</li>
+                    <li><strong>Estado</strong>: <span class="error">❌ Rechazado - Reemplazado por HTML renderizado</span></li>
+                </ul>
+            </div>
+
+            <h2>📊 Patrones de Comportamiento Identificados</h2>
+
+            <h3>1. Comunicación Técnica</h3>
+            <ul>
+                <li><strong>Estilo</strong>: Directo y específico</li>
+                <li><strong>Preferencias</strong>:
+                    <ul>
+                        <li>Comandos en inglés</li>
+                        <li>Explicaciones claras y concisas</li>
+                        <li>Soluciones prácticas</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2. Toma de Decisiones</h3>
+            <ul>
+                <li><strong>Enfoque</strong>: Pragmático y basado en costos</li>
+                <li><strong>Prioridades</strong>:
+                    <ul>
+                        <li>Funcionalidad sobre perfección</li>
+                        <li>Simplicidad sobre complejidad</li>
+                        <li>Seguridad desde el inicio</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3. Gestión de Proyectos</h3>
+            <ul>
+                <li><strong>Metodología</strong>: Iterativa y adaptativa</li>
+                <li><strong>Características</strong>:
+                    <ul>
+                        <li>Documentación exhaustiva</li>
+                        <li>Separación de responsabilidades</li>
+                        <li>Infraestructura como código</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h2>🎯 Memories Candidatos para Futuras Sesiones</h2>
+
+            <div class="memory-item memory-candidate">
+                <h3>1. Preferencia por Soluciones Standalone</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario prefiere soluciones que no dependan de servicios externos</li>
+                    <li><strong>Evidencia</strong>: Rechazo de CDN externos y preferencia por archivos HTML autónomos</li>
+                    <li><strong>Aplicación</strong>: Evitar dependencias externas en futuras implementaciones</li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-candidate">
+                <h3>2. Valoración de la Limpieza de Código</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario aprecia configuraciones limpias y sin elementos innecesarios</li>
+                    <li><strong>Evidencia</strong>: Solicitud de eliminar referencias a markdown de Nginx</li>
+                    <li><strong>Aplicación</strong>: Mantener configuraciones minimalistas y limpias</li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-candidate">
+                <h3>3. Importancia de la Experiencia de Usuario</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario valora la experiencia de usuario final</li>
+                    <li><strong>Evidencia</strong>: Insistencia en que la documentación se vea correctamente renderizada</li>
+                    <li><strong>Aplicación</strong>: Priorizar UX en todas las implementaciones</li>
+                </ul>
+            </div>
+
+            <div class="memory-item memory-candidate">
+                <h3>4. Preferencia por Automatización</h3>
+                <ul>
+                    <li><strong>Descripción</strong>: El usuario valora la automatización de procesos</li>
+                    <li><strong>Evidencia</strong>: Implementación de GitHub Actions para CI/CD</li>
+                    <li><strong>Aplicación</strong>: Proponer automatización en futuros proyectos</li>
+                </ul>
+            </div>
+
+            <h2>🔮 Recomendaciones para Futuras Interacciones</h2>
+
+            <h3>1. Comunicación Inicial</h3>
+            <ul>
+                <li>Confirmar preferencias de herramientas (sftp vs scp, etc.)</li>
+                <li>Establecer expectativas sobre documentación</li>
+                <li>Definir nivel de detalle requerido</li>
+            </ul>
+
+            <h3>2. Desarrollo de Soluciones</h3>
+            <ul>
+                <li>Proponer soluciones simples primero</li>
+                <li>Evitar dependencias externas innecesarias</li>
+                <li>Priorizar funcionalidad sobre perfección</li>
+            </ul>
+
+            <h3>3. Gestión de Proyectos</h3>
+            <ul>
+                <li>Documentar decisiones y configuraciones temprano</li>
+                <li>Separar responsabilidades en repositorios diferentes</li>
+                <li>Implementar seguridad desde el inicio</li>
+            </ul>
+
+            <h3>4. Resolución de Problemas</h3>
+            <ul>
+                <li>Enfoque sistemático y estructurado</li>
+                <li>Validar soluciones antes de implementar</li>
+                <li>Mantener configuraciones limpias</li>
+            </ul>
+
+            <h2>📝 Conclusión</h2>
+            <p>Los memories aprendidos durante esta interacción proporcionan una base sólida para futuras colaboraciones, permitiendo un enfoque más eficiente y alineado con las preferencias del usuario. La combinación de experiencia técnica, enfoque pragmático y atención a la calidad hace que el usuario sea un excelente colaborador para proyectos de infraestructura y despliegue.</p>
+
+            <p><strong>Nota</strong>: Este documento debe actualizarse con cada nueva interacción para mantener un registro completo de las preferencias y patrones del usuario.</p>
+        </div>
+    </div>
+</body>
+</html>
+

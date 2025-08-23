@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubastApp - Guía de Solución de Problemas</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            color: inherit;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav {
+            background: #34495e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #3498db;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content p {
+            margin-bottom: 15px;
+        }
+        .content ul, .content ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        .content li {
+            margin-bottom: 5px;
+        }
+        .content blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .warning {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .solution {
+            background-color: #d5f4e6;
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="README.html">README</a>
+            <a href="deployment-postmortem.html">Postmortem</a>
+            <a href="architecture-overview.html">Arquitectura</a>
+            <a href="security-checklist.html">Seguridad</a>
+            <a href="troubleshooting-guide.html">Solución de Problemas</a>
+            <a href="user-interactions-timeline.html">Interacciones</a>
+        </div>
+        
+        <div class="content">
+            <h1>SubastApp - Guía de Solución de Problemas</h1>
+
+            <h2>🔧 Problemas Comunes y Soluciones</h2>
+
+            <h3>1. Problemas de Conectividad</h3>
+
+            <h4>Error: "No se puede conectar al servidor"</h4>
+            <p><strong>Síntomas:</strong> La aplicación no responde o muestra errores de conexión</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar que el servidor esté funcionando: <code>ssh root@159.223.6.121 "docker ps"</code></li>
+                    <li>Verificar logs del backend: <code>ssh root@159.223.6.121 "docker logs subastapp-backend --tail 20"</code></li>
+                    <li>Reiniciar servicios: <code>ssh root@159.223.6.121 "cd /home/subastapp/SubastApp && docker-compose restart"</code></li>
+                </ol>
+            </div>
+
+            <h4>Error: "CORS policy"</h4>
+            <p><strong>Síntomas:</strong> Errores de CORS en la consola del navegador</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar configuración CORS en <code>backend/src/server.ts</code></li>
+                    <li>Agregar IP del cliente a la lista de orígenes permitidos</li>
+                    <li>Reiniciar el backend después de cambios</li>
+                </ol>
+            </div>
+
+            <h3>2. Problemas de Base de Datos</h3>
+
+            <h4>Error: "Database connection failed"</h4>
+            <p><strong>Síntomas:</strong> Errores de conexión a MySQL</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar que MySQL esté ejecutándose: <code>ssh root@159.223.6.121 "docker ps | grep mysql"</code></li>
+                    <li>Verificar logs de MySQL: <code>ssh root@159.223.6.121 "docker logs subasta_app-mysql --tail 20"</code></li>
+                    <li>Verificar credenciales en <code>docker-compose.yml</code></li>
+                    <li>Reiniciar MySQL si es necesario: <code>ssh root@159.223.6.121 "docker restart subasta_app-mysql"</code></li>
+                </ol>
+            </div>
+
+            <h4>Error: "Table doesn't exist"</h4>
+            <p><strong>Síntomas:</strong> Errores de tablas no encontradas</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar que las migraciones se ejecutaron: <code>ssh root@159.223.6.121 "docker exec subastapp-backend npx prisma migrate status"</code></li>
+                    <li>Ejecutar migraciones: <code>ssh root@159.223.6.121 "docker exec subastapp-backend npx prisma migrate deploy"</code></li>
+                    <li>Verificar esquema de base de datos: <code>ssh root@159.223.6.121 "docker exec subasta_app-mysql mysql -u subasta_app_user -psubasta_app_password subasta_app -e 'SHOW TABLES;'"</code></li>
+                </ol>
+            </div>
+
+            <h3>3. Problemas de Autenticación</h3>
+
+            <h4>Error: "Usuario no registrado"</h4>
+            <p><strong>Síntomas:</strong> No se puede acceder con credenciales válidas</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar usuarios en la base de datos: <code>ssh root@159.223.6.121 "docker exec subasta_app-mysql mysql -u subasta_app_user -psubasta_app_password subasta_app -e 'SELECT * FROM Usuario;'"</code></li>
+                    <li>Crear usuario de prueba si es necesario</li>
+                    <li>Verificar logs de autenticación en el backend</li>
+                </ol>
+            </div>
+
+            <h3>4. Problemas de Build y Dependencias</h3>
+
+            <h4>Error: "npm ci failed"</h4>
+            <p><strong>Síntomas:</strong> Errores durante la instalación de dependencias</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar archivos <code>package.json</code> no corruptos</li>
+                    <li>Usar <code>--legacy-peer-deps</code> si hay conflictos</li>
+                    <li>Limpiar cache de npm: <code>npm cache clean --force</code></li>
+                    <li>Reconstruir imágenes Docker: <code>docker-compose build --no-cache</code></li>
+                </ol>
+            </div>
+
+            <h4>Error: "TypeScript compilation failed"</h4>
+            <p><strong>Síntomas:</strong> Errores de compilación TypeScript</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar configuración de TypeScript en <code>tsconfig.json</code></li>
+                    <li>Actualizar dependencias de TypeScript si es necesario</li>
+                    <li>Usar <code>|| true</code> en Dockerfile para bypass temporal</li>
+                    <li>Verificar tipos en el código fuente</li>
+                </ol>
+            </div>
+
+            <h3>5. Problemas de Docker</h3>
+
+            <h4>Error: "Container failed to start"</h4>
+            <p><strong>Síntomas:</strong> Contenedores no se inician correctamente</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar logs del contenedor: <code>docker logs [container-name]</code></li>
+                    <li>Verificar recursos del sistema: <code>docker system df</code></li>
+                    <li>Limpiar recursos no utilizados: <code>docker system prune -a</code></li>
+                    <li>Reiniciar Docker daemon si es necesario</li>
+                </ol>
+            </div>
+
+            <h4>Error: "Port already in use"</h4>
+            <p><strong>Síntomas:</strong> Puertos ocupados por otros servicios</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar puertos en uso: <code>netstat -tulpn | grep :80</code></li>
+                    <li>Detener servicios conflictivos</li>
+                    <li>Cambiar puertos en <code>docker-compose.yml</code> si es necesario</li>
+                </ol>
+            </div>
+
+            <h3>6. Problemas de Nginx</h3>
+
+            <h4>Error: "502 Bad Gateway"</h4>
+            <p><strong>Síntomas:</strong> Nginx no puede conectar con el backend</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar que el backend esté ejecutándose</li>
+                    <li>Verificar configuración de proxy en <code>nginx.conf</code></li>
+                    <li>Verificar logs de Nginx: <code>docker logs subastapp-nginx</code></li>
+                    <li>Reiniciar Nginx: <code>docker restart subastapp-nginx</code></li>
+                </ol>
+            </div>
+
+            <h3>7. Problemas de Documentación Web</h3>
+
+            <h4>Error: "Documentación no se muestra correctamente"</h4>
+            <p><strong>Síntomas:</strong> Archivos markdown se muestran como texto plano</p>
+            
+            <div class="solution">
+                <strong>Solución:</strong>
+                <ol>
+                    <li>Verificar que los archivos HTML estén en el servidor</li>
+                    <li>Verificar configuración de Nginx para documentación</li>
+                    <li>Reiniciar Nginx después de cambios</li>
+                    <li>Usar archivos HTML renderizados en lugar de markdown</li>
+                </ol>
+            </div>
+
+            <h2>🔍 Comandos de Diagnóstico Útiles</h2>
+
+            <h3>Verificar Estado del Sistema</h3>
+            <pre><code># Estado de contenedores
+docker ps -a
+
+# Logs de todos los servicios
+docker-compose logs
+
+# Uso de recursos
+docker stats
+
+# Espacio en disco
+df -h
+
+# Memoria disponible
+free -h</code></pre>
+
+            <h3>Verificar Conectividad</h3>
+            <pre><code># Test de conectividad al servidor
+ping 159.223.6.121
+
+# Test de puertos
+telnet 159.223.6.121 80
+telnet 159.223.6.121 443
+
+# Test de DNS
+nslookup 159.223.6.121</code></pre>
+
+            <h3>Verificar Base de Datos</h3>
+            <pre><code># Conectar a MySQL
+docker exec -it subasta_app-mysql mysql -u subasta_app_user -psubasta_app_password subasta_app
+
+# Verificar tablas
+SHOW TABLES;
+
+# Verificar datos
+SELECT * FROM Usuario LIMIT 5;
+SELECT * FROM Item LIMIT 5;</code></pre>
+
+            <h2>📞 Contactos de Soporte</h2>
+
+            <h3>Equipo Técnico</h3>
+            <ul>
+                <li><strong>Ingeniero de Sistemas</strong> - Responsable de infraestructura</li>
+                <li><strong>Daniel Otón</strong> - Desarrollador</li>
+                <li><strong>Cursor AI</strong> - Soporte técnico</li>
+            </ul>
+
+            <h2>📋 Checklist de Verificación Rápida</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Comando de Verificación</th>
+                        <th>Estado Esperado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Docker</td>
+                        <td><code>docker ps</code></td>
+                        <td>3 contenedores ejecutándose</td>
+                    </tr>
+                    <tr>
+                        <td>Backend</td>
+                        <td><code>curl http://159.223.6.121/api/health</code></td>
+                        <td>Respuesta JSON</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend</td>
+                        <td><code>curl http://159.223.6.121/</code></td>
+                        <td>HTML de la aplicación</td>
+                    </tr>
+                    <tr>
+                        <td>MySQL</td>
+                        <td><code>docker exec subasta_app-mysql mysql -e "SELECT 1;"</code></td>
+                        <td>Resultado exitoso</td>
+                    </tr>
+                    <tr>
+                        <td>Documentación</td>
+                        <td><code>curl http://159.223.6.121/documentacion</code></td>
+                        <td>HTML de documentación</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Conclusión</h2>
+            <p>Esta guía cubre los problemas más comunes encontrados durante el despliegue. Para problemas específicos no cubiertos aquí, consultar los logs detallados y contactar al equipo técnico.</p>
+        </div>
+    </div>
+</body>
+</html>
+

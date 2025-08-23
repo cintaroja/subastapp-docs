@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubastApp - Documentación del Proyecto</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #7f8c8d;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            color: inherit;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav {
+            background: #34495e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #3498db;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content p {
+            margin-bottom: 15px;
+        }
+        .content ul, .content ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        .content li {
+            margin-bottom: 5px;
+        }
+        .content blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="README.html">README</a>
+            <a href="deployment-postmortem.html">Postmortem</a>
+            <a href="architecture-overview.html">Arquitectura</a>
+            <a href="security-checklist.html">Seguridad</a>
+            <a href="troubleshooting-guide.html">Solución de Problemas</a>
+            <a href="user-interactions-timeline.html">Interacciones</a>
+            <a href="ai-memories.html">Memories AI</a>
+        </div>
+        
+        <div class="content">
+            <h1>SubastApp - Documentación del Proyecto</h1>
+
+            <h2>📋 Índice de Documentación</h2>
+
+            <p>Esta carpeta contiene la documentación completa del proyecto SubastApp, incluyendo el postmortem del despliegue y toda la información técnica relevante.</p>
+
+            <h3>📚 Archivos de Documentación</h3>
+
+            <ol>
+                <li><strong><a href="deployment-postmortem.html">deployment-postmortem.html</a></strong> - Postmortem completo del despliegue</li>
+                <li><strong><a href="architecture-overview.html">architecture-overview.html</a></strong> - Arquitectura del sistema</li>
+                <li><strong><a href="security-checklist.html">security-checklist.html</a></strong> - Checklist de seguridad</li>
+                <li><strong><a href="troubleshooting-guide.html">troubleshooting-guide.html</a></strong> - Guía de solución de problemas</li>
+                <li><strong><a href="user-interactions-timeline.html">user-interactions-timeline.html</a></strong> - Timeline de interacciones clave del usuario</li>
+                <li><strong><a href="ai-memories.html">ai-memories.html</a></strong> - Memories aprendidos por el AI Assistant</li>
+            </ol>
+
+            <h2>🎯 Resumen del Proyecto</h2>
+
+            <p><strong>SubastApp</strong> es una aplicación de subastas en tiempo real desarrollada con:</p>
+            <ul>
+                <li><strong>Backend</strong>: Node.js + TypeScript + Express + Socket.IO + Prisma</li>
+                <li><strong>Frontend</strong>: React + TypeScript + Vite + Tailwind CSS</li>
+                <li><strong>Base de datos</strong>: MySQL</li>
+                <li><strong>Infraestructura</strong>: Docker + Docker Compose + Digital Ocean + Terraform</li>
+                <li><strong>CI/CD</strong>: GitHub Actions</li>
+            </ul>
+
+            <h2>🚀 Estado Actual</h2>
+
+            <ul>
+                <li>✅ <strong>Aplicación desplegada y funcionando</strong> en <code>http://159.223.6.121/</code></li>
+                <li>✅ <strong>Autenticación funcionando</strong> con 6 usuarios de prueba</li>
+                <li>✅ <strong>Base de datos poblada</strong> con datos de ejemplo</li>
+                <li>✅ <strong>Repositorios actualizados</strong> y seguros</li>
+                <li>✅ <strong>Infraestructura como código</strong> con Terraform</li>
+                <li>✅ <strong>Documentación completa</strong> accesible vía web</li>
+            </ul>
+
+            <h2>📅 Fecha del Despliegue</h2>
+
+            <p><strong>23 de Agosto de 2025</strong> - Despliegue exitoso en Digital Ocean Droplet</p>
+
+            <h2>👥 Equipo</h2>
+
+            <ul>
+                <li><strong>Desarrollo</strong>: Cursor AI (código original)</li>
+                <li><strong>Curación</strong>: Daniel Otón</li>
+                <li><strong>Infraestructura</strong>: Cursor AI + Ingeniero de Sistemas</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
