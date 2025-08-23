@@ -37,6 +37,7 @@ Todos los archivos Markdown tienen su correspondiente versión HTML para visuali
 - ✅ **Infraestructura como código** implementada
 - ✅ **Documentación completa** y actualizada
 - ✅ **Autenticación funcionando** con usuarios de prueba
+- ✅ **Documentación web** disponible en [GitHub Pages](https://cintaroja.github.io/subastapp-docs/)
 
 ## 📅 Fecha de Última Actualización
 
