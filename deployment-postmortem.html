@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubastApp - Postmortem del Despliegue</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        h3 {
+            color: #495057;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+        
+        .error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .timeline {
+            border-left: 3px solid #667eea;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            position: absolute;
+            left: -2.4rem;
+            top: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-duration {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: #5a6fd8;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .timeline {
+                padding-left: 1rem;
+            }
+            
+            .timeline-item::before {
+                left: -1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Volver al Índice</a>
+        
+        <div class="header">
+            <h1>🚀 SubastApp - Postmortem del Despliegue</h1>
+            <p>Análisis completo del proceso de despliegue en Digital Ocean</p>
+        </div>
+        
+        <div class="content">
+            <div class="info-box success">
+                <h3>✅ Resultado: EXITOSO</h3>
+                <p><strong>Fecha del despliegue:</strong> 23 de Agosto de 2025</p>
+                <p><strong>Duración total:</strong> ~3 horas</p>
+                <p><strong>Equipo:</strong> Ingeniero de Sistemas + Cursor AI</p>
+            </div>
+            
+            <h2>🎯 Objetivo del Proyecto</h2>
+            <p>Desplegar la aplicación SubastApp en un servidor de Digital Ocean para uso intensivo durante 10 horas por 20 personas, seguido de mantenimiento en modo producción.</p>
+            
+            <h2>🏗️ Arquitectura Final Implementada</h2>
+            
+            <h3>Infraestructura</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Proveedor:</strong> Digital Ocean
+                </div>
+                <div class="tech-item">
+                    <strong>Servicio:</strong> Droplet (Ubuntu 22.04)
+                </div>
+                <div class="tech-item">
+                    <strong>Especificaciones:</strong> 2GB RAM, 1 vCPU, 50GB SSD
+                </div>
+                <div class="tech-item">
+                    <strong>Región:</strong> Amsterdam (ams3)
+                </div>
+                <div class="tech-item">
+                    <strong>IP:</strong> 159.223.6.121
+                </div>
+            </div>
+            
+            <h3>Stack Tecnológico</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Backend:</strong> Node.js 18 + TypeScript + Express + Socket.IO + Prisma
+                </div>
+                <div class="tech-item">
+                    <strong>Frontend:</strong> React + TypeScript + Vite + Tailwind CSS
+                </div>
+                <div class="tech-item">
+                    <strong>Base de datos:</strong> MySQL 8.0 (local en Docker)
+                </div>
+                <div class="tech-item">
+                    <strong>Proxy/Web Server:</strong> Nginx
+                </div>
+                <div class="tech-item">
+                    <strong>Contenedores:</strong> Docker + Docker Compose
+                </div>
+                <div class="tech-item">
+                    <strong>Infraestructura como código:</strong> Terraform
+                </div>
+                <div class="tech-item">
+                    <strong>CI/CD:</strong> GitHub Actions
+                </div>
+            </div>
+            
+            <h2>📝 Cronología del Despliegue</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">Fase 1: Análisis y Planificación (30 min)</div>
+                    <div class="timeline-duration">Duración: 30 minutos</div>
+                    <ul>
+                        <li><strong>Análisis del código:</strong> Revisión de la aplicación SUBASTAPP</li>
+                        <li><strong>Evaluación de opciones:</strong>
+                            <ul>
+                                <li>Digital Ocean App Platform + Managed MySQL (rechazado por costos)</li>
+                                <li>Droplet + Managed MySQL (rechazado por complejidad)</li>
+                                <li><strong>Droplet + MySQL local</strong> (seleccionado por costos y control)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Decisión:</strong> Usar Docker para facilitar futura migración a App Platform</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-title">Fase 2: Configuración de Repositorios (45 min)</div>
+                    <div class="timeline-duration">Duración: 45 minutos</div>
+                    <ul>
+                        <li><strong>Separación de repositorios:</strong>
+                            <ul>
+                                <li><code>SubastApp</code>: Código de la aplicación</li>
+                                <li><code>subastapp-infra</code>: Infraestructura como código</li>
+                            </ul>
+                        </li>
+                        <li><strong>Configuración de Git:</strong>
+                            <ul>
+                                <li>Primer commit con mensaje específico</li>
+                                <li>Cambio de repositorio remoto</li>
+                                <li>Configuración de workspace Terraform</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-title">Fase 3: Infraestructura como Código (60 min)</div>
+                    <div class="timeline-duration">Duración: 60 minutos</div>
+                    <ul>
+                        <li><strong>Terraform:</strong>
+                            <ul>
+                                <li>Workspace <code>subastapp</code> creado</li>
+                                <li>Droplet configurado con cloud-init</li>
+                                <li>SSH keys configuradas</li>
+                                <li>Variables de entorno definidas</li>
+                            </ul>
+                        </li>
+                        <li><strong>GitHub Actions:</strong>
+                            <ul>
+                                <li>Workflow para despliegue de infraestructura</li>
+                                <li>Workflow para despliegue de aplicación</li>
+                                <li>Configuración de secrets y PAT</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-title">Fase 4: Despliegue Inicial (90 min)</div>
+                    <div class="timeline-duration">Duración: 90 minutos</div>
+                    <div class="info-box warning">
+                        <strong>Problemas encontrados:</strong>
+                        <ul>
+                            <li>Error de SSH en GitHub Actions</li>
+                            <li>Errores de <code>tar</code> durante transferencia de archivos</li>
+                            <li>Corrupción de archivos <code>package.json</code> (Windows → Linux)</li>
+                            <li>Errores de dependencias npm</li>
+                            <li>Problemas de TypeScript en build</li>
+                            <li>Errores de CORS</li>
+                            <li>Problemas de conectividad de base de datos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-title">Fase 5: Resolución de Problemas (120 min)</div>
+                    <div class="timeline-duration">Duración: 120 minutos</div>
+                    <div class="info-box success">
+                        <strong>Solución de errores:</strong>
+                        <ul>
+                            <li>Regeneración de SSH keys</li>
+                            <li>Cambio de <code>tar</code> a <code>rsync</code> para transferencia</li>
+                            <li>Recreación manual de archivos <code>package.json</code></li>
+                            <li>Downgrade de dependencias para compatibilidad</li>
+                            <li>Configuración de CORS para IP de producción</li>
+                            <li>Configuración correcta de Docker Compose con MySQL</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-title">Fase 6: Población de Base de Datos (30 min)</div>
+                    <div class="timeline-duration">Duración: 30 minutos</div>
+                    <ul>
+                        <li><strong>Datos iniciales:</strong>
+                            <ul>
+                                <li>6 usuarios de prueba creados</li>
+                                <li>2 items de subasta (jugadores de fútbol)</li>
+                                <li>1 puja de ejemplo</li>
+                                <li>Configuración de subasta</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-title">Fase 7: Seguridad y Limpieza (45 min)</div>
+                    <div class="timeline-duration">Duración: 45 minutos</div>
+                    <div class="info-box error">
+                        <strong>Problema de seguridad:</strong> Información sensible en repositorios
+                    </div>
+                    <div class="info-box success">
+                        <strong>Acciones tomadas:</strong>
+                        <ul>
+                            <li>Eliminación de archivos <code>.env</code></li>
+                            <li>Eliminación de claves SSH</li>
+                            <li>Regeneración de tokens comprometidos</li>
+                            <li>Configuración de <code>.gitignore</code></li>
+                            <li>Actualización de repositorios</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-title">Fase 8: Documentación Web (90 min)</div>
+                    <div class="timeline-duration">Duración: 90 minutos</div>
+                    <ul>
+                        <li><strong>Creación de documentación completa:</strong>
+                            <ul>
+                                <li>Postmortem del despliegue</li>
+                                <li>Arquitectura del sistema</li>
+                                <li>Checklist de seguridad</li>
+                                <li>Guía de solución de problemas</li>
+                                <li>Timeline de interacciones</li>
+                                <li>Memories del AI Assistant</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>📊 Estadísticas Finales</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Tiempo total:</strong> ~3 horas
+                </div>
+                <div class="tech-item">
+                    <strong>Problemas resueltos:</strong> 7 problemas críticos
+                </div>
+                <div class="tech-item">
+                    <strong>Repositorios creados:</strong> 2 repositorios especializados
+                </div>
+                <div class="tech-item">
+                    <strong>Documentación generada:</strong> 8 archivos de documentación
+                </div>
+            </div>
+            
+            <h2>🎯 Lecciones Aprendidas</h2>
+            <ul>
+                <li><strong>Separación de responsabilidades:</strong> Es crucial separar la aplicación, infraestructura y documentación en repositorios diferentes</li>
+                <li><strong>Infraestructura como código:</strong> Terraform facilita enormemente el despliegue y mantenimiento</li>
+                <li><strong>Docker:</strong> Simplifica la gestión de dependencias y facilita la portabilidad</li>
+                <li><strong>Documentación:</strong> Es fundamental documentar todo el proceso para futuras referencias</li>
+                <li><strong>Seguridad:</strong> Siempre revisar que no se suban archivos sensibles a los repositorios</li>
+            </ul>
+            
+            <h2>🔮 Próximos Pasos</h2>
+            <ul>
+                <li>Configurar monitoreo y alertas</li>
+                <li>Implementar backups automáticos</li>
+                <li>Configurar CI/CD completo</li>
+                <li>Optimizar rendimiento</li>
+                <li>Implementar tests automatizados</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

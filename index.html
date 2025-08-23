@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubastApp - Documentación del Proyecto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .doc-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .doc-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .doc-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .doc-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .status {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+        
+        .repos-section {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .repo-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .repo-link:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 SubastApp</h1>
+            <p>Documentación Completa del Proyecto</p>
+        </div>
+        
+        <div class="content">
+            <div class="status">
+                <strong>✅ Estado del Proyecto:</strong> Aplicación desplegada y funcionando en 
+                <a href="http://159.223.6.121/" target="_blank">http://159.223.6.121/</a>
+            </div>
+            
+            <div class="repos-section">
+                <h2>🏗️ Repositorios del Proyecto</h2>
+                <a href="https://github.com/cintaroja/SubastApp" class="repo-link" target="_blank">📱 SUBASTAPP (Aplicación)</a>
+                <a href="https://github.com/cintaroja/subastapp-infra" class="repo-link" target="_blank">🏗️ subastapp-infra (Infraestructura)</a>
+                <a href="https://github.com/cintaroja/subastapp-docs" class="repo-link" target="_blank">📚 subastapp-docs (Documentación)</a>
+            </div>
+            
+            <div class="section">
+                <h2>📖 Documentación Principal</h2>
+                <div class="docs-grid">
+                    <a href="README.html" class="doc-card">
+                        <h3>📋 README</h3>
+                        <p>Índice y descripción general del proyecto SubastApp</p>
+                        <div class="doc-links">
+                            <span class="btn btn-primary">Ver HTML</span>
+                        </div>
+                    </a>
+                    
+                    <a href="deployment-postmortem.html" class="doc-card">
+                        <h3>🚀 Postmortem del Despliegue</h3>
+                        <p>Análisis completo del proceso de despliegue en Digital Ocean</p>
+                        <div class="doc-links">
+                            <span class="btn btn-primary">Ver HTML</span>
+                        </div>
+                    </a>
+                    
+                    <a href="architecture-overview.html" class="doc-card">
+                        <h3>🏗️ Arquitectura del Sistema</h3>
+                        <p>Descripción detallada de la arquitectura y componentes</p>
+                        <div class="doc-links">
+                            <span class="btn btn-primary">Ver HTML</span>
+                        </div>
+                    </a>
+                    
+                    <a href="security-checklist.html" class="doc-card">
+                        <h3>🔒 Checklist de Seguridad</h3>
+                        <p>Lista de verificación de seguridad implementada</p>
+                        <div class="doc-links">
+                            <span class="btn btn-primary">Ver HTML</span>
+                        </div>
+                    </a>
+                    
+                    <a href="troubleshooting-guide.html" class="doc-card">
+                        <h3>🔧 Guía de Solución de Problemas</h3>
+                        <p>Guía completa para resolver problemas comunes</p>
+                        <div class="doc-links">
+                            <span class="btn btn-primary">Ver HTML</span>
+                        </div>
+                    </a>
+                    
+                    <a href="user-interactions-timeline.html" class="doc-card">
+                        <h3>📅 Timeline de Interacciones</h3>
+                        <p>Cronología detallada de las interacciones del usuario</p>
+                        <div class="doc-links">
+                            <span class="btn btn-primary">Ver HTML</span>
+                        </div>
+                    </a>
+                    
+                    <a href="ai-memories.html" class="doc-card">
+                        <h3>🧠 Memories del AI Assistant</h3>
+                        <p>Recuerdos y preferencias aprendidas durante el desarrollo</p>
+                        <div class="doc-links">
+                            <span class="btn btn-primary">Ver HTML</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🔧 Tecnologías Utilizadas</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 5px;">
+                        <strong>Backend:</strong> Node.js + TypeScript + Express + Socket.IO + Prisma
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 5px;">
+                        <strong>Frontend:</strong> React + TypeScript + Vite + Tailwind CSS
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 5px;">
+                        <strong>Base de Datos:</strong> MySQL 8.0
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 5px;">
+                        <strong>Infraestructura:</strong> Docker + Digital Ocean + Terraform
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p><strong>SubastApp</strong> - Desarrollado con ❤️ por el equipo de SubastApp</p>
+                <p>Fecha de última actualización: <strong>23 de Agosto de 2025</strong></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
