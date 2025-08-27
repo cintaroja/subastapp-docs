@@ -27,6 +27,16 @@ Este documento registra todos los "memories" (recuerdos) que el AI Assistant ha 
 - **Impacto**: Creación de repositorio `subastapp-infra` separado
 - **Estado**: ✅ **Aceptado y aplicado**
 
+### 4. **Actualización de IPs y Despliegue**
+- **Memory ID**: 6998077
+- **Descripción**: El usuario solicitó reemplazar todas las ocurrencias de IP local (192.168.18.124) por IP de producción (159.223.6.121) y desplegar
+- **Contexto**: Actualización de configuración para producción
+- **Impacto**: 
+  - Reemplazo de IPs en archivos de configuración
+  - Despliegue exitoso en servidor remoto
+  - Corrección de configuración Nginx
+- **Estado**: ✅ **Aceptado y aplicado**
+
 ## 🔍 Memories Aprendidos pero No Comunicados
 
 ### 1. **Preferencia de Comandos en Inglés**
