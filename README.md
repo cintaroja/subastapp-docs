@@ -38,10 +38,11 @@ Todos los archivos Markdown tienen su correspondiente versión HTML para visuali
 - ✅ **Documentación completa** y actualizada
 - ✅ **Autenticación funcionando** con usuarios de prueba
 - ✅ **Documentación web** disponible en [GitHub Pages](https://cintaroja.github.io/subastapp-docs/)
+- ✅ **IPs actualizadas** a servidor de producción (27 de Agosto de 2025)
 
 ## 📅 Fecha de Última Actualización
 
-**23 de Agosto de 2025** - Documentación creada y organizada
+**27 de Agosto de 2025** - Actualización de IPs a producción y documentación actualizada
 
 ## 🔧 Tecnologías Documentadas
 

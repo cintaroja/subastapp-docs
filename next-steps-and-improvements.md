@@ -100,13 +100,41 @@ find $BACKUP_DIR -name "*.sql" -mtime +7 -delete
 find $BACKUP_DIR -name "*.tar.gz" -mtime +7 -delete
 ```
 
-#### Automatización:
-```bash
-# Agregar al crontab
-crontab -e
-# Backup diario a las 2 AM
-0 2 * * * /home/subastapp/backup.sh
-```
+### 4. **Regeneración de Tokens Comprometidos - PRIORIDAD CRÍTICA**
+**Estado**: ❌ Pendiente  
+**Impacto**: Seguridad crítica - tokens expuestos en repositorios
+
+#### Tokens que necesitan regeneración:
+- **Digital Ocean API Token**: Regenerar en panel de control
+- **RapidAPI Key**: Regenerar en dashboard de RapidAPI
+- **JWT Secret**: Generar nuevo secret y actualizar variables de entorno
+- **Database Credentials**: Actualizar contraseñas de MySQL
+
+#### Proceso de regeneración:
+1. Generar nuevos tokens/credenciales
+2. Actualizar variables de entorno en servidor
+3. Reiniciar servicios afectados
+4. Verificar funcionamiento
+5. Eliminar tokens antiguos
+
+## ✅ Tareas Completadas Recientemente
+
+### 1. **Actualización de IPs a Producción - COMPLETADO**
+**Fecha**: 27 de Agosto de 2025  
+**Estado**: ✅ Completado  
+**Impacto**: Configuración correcta para producción
+
+#### Cambios realizados:
+- Reemplazo de `192.168.18.124` por `159.223.6.121` en todos los archivos
+- Actualización de URLs de Socket.IO y API
+- Corrección de configuración CORS
+- Despliegue exitoso en servidor de producción
+
+#### Archivos modificados:
+- `frontend/src/hooks/useSocket.ts`
+- `frontend/src/services/plantillasService.ts`
+- `backend/src/server.ts`
+- `frontend/nginx.conf`
 
 ## 🔧 Mejoras de Seguridad
 

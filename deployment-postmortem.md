@@ -522,6 +522,29 @@ http {
 - **Documentación**: Completa y accesible en `http://159.223.6.121/documentacion`
 - **Memories**: Documentados para futuras sesiones
 
+## 🔄 Actualización Reciente (27 de Agosto de 2025)
+
+### Cambios Realizados:
+1. **Actualización de IPs**: Reemplazo de todas las ocurrencias de IP local (`192.168.18.124`) por IP de producción (`159.223.6.121`)
+2. **Archivos Modificados**:
+   - `frontend/src/hooks/useSocket.ts` - URL de Socket.IO
+   - `frontend/src/services/plantillasService.ts` - URL de API
+   - `backend/src/server.ts` - Configuración CORS y logs
+   - `frontend/nginx.conf` - Corrección de configuración Nginx
+
+### Proceso de Despliegue:
+1. **Commit y Push**: Cambios subidos al repositorio principal
+2. **Transferencia**: Archivos actualizados via sftp al servidor remoto
+3. **Reconstrucción**: Contenedores Docker reconstruidos con `docker-compose up -d --build`
+4. **Corrección**: Error de configuración Nginx (`must-revalidate`) corregido
+5. **Verificación**: Todos los contenedores funcionando correctamente
+
+### Resultado:
+- ✅ **Aplicación funcionando**: `http://159.223.6.121/` accesible
+- ✅ **Backend API**: Puerto 3001 operativo
+- ✅ **Contenedores**: MySQL, Backend, Frontend, Nginx todos operativos
+- ✅ **Documentación**: Actualizada con nuevos memories
+
 ## 👥 Usuarios de Prueba Disponibles
 
 | Email | Nombre | Créditos |

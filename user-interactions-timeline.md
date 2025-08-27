@@ -171,6 +171,34 @@ Este documento registra las interacciones más importantes del usuario que influ
 2. **Documentación**: Documentar decisiones y configuraciones más temprano
 3. **Testing**: Más testing en etapas tempranas del proceso
 
+## 🔄 Interacciones Recientes (27 de Agosto de 2025)
+
+### Actualización de IPs y Despliegue
+**Interacción**: "Quiero que reemplaces en el proyecto subastapp todas las ocurrencias de 192.168.18.124 por 159.223.6.121 y despliegues"
+
+**Proceso**:
+1. **Búsqueda sistemática**: Identificación de todas las ocurrencias de IP local
+2. **Reemplazo seguro**: Verificación de que no hay información sensible en los cambios
+3. **Commit y Push**: Subida de cambios al repositorio principal
+4. **Despliegue remoto**: Transferencia de archivos y reconstrucción de contenedores
+5. **Corrección de errores**: Resolución de problema de configuración Nginx
+6. **Verificación**: Confirmación de que todos los servicios funcionan correctamente
+
+**Impacto**:
+- ✅ **Configuración de producción**: IPs actualizadas correctamente
+- ✅ **Despliegue exitoso**: Aplicación funcionando en servidor de producción
+- ✅ **Documentación actualizada**: Memories y documentación actualizados
+- ✅ **Proceso validado**: Metodología de despliegue confirmada
+
+### Revisión de Documentación
+**Interacción**: "Vamos a repasar bien la información. Vuelve a hacer doble check de los ficheros que hay en la documentación porque creo que merece la pena actualizar más de los que tú has actualizado"
+
+**Impacto**:
+- ✅ **Revisión completa**: Análisis exhaustivo de toda la documentación
+- ✅ **Actualización sistemática**: Identificación de archivos que necesitan actualización
+- ✅ **Consistencia**: Asegurar que toda la documentación refleje el estado actual
+- ✅ **Calidad**: Mejora en la precisión y completitud de la documentación
+
 ---
 
-**Conclusión**: Las interacciones del usuario fueron fundamentales para el éxito del proyecto, proporcionando dirección técnica, validación continua y enfoque pragmático que resultó en un despliegue exitoso y funcional.
+**Conclusión**: Las interacciones del usuario fueron fundamentales para el éxito del proyecto, proporcionando dirección técnica, validación continua y enfoque pragmático que resultó en un despliegue exitoso y funcional. La actualización reciente demuestra la importancia de mantener la documentación actualizada y el valor de un proceso de despliegue bien establecido.
